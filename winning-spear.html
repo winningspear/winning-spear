@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Winning Spear — Revenue Growth & Academic Mentorship</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:        #050c1a;
+  --bg2:       #070f1f;
+  --bg3:       #04080f;
+  --border:    #0f1e36;
+  --border2:   #162840;
+  --blue:      #4a8fd4;
+  --blue-lt:   #6eaee8;
+  --blue-dim:  #1a3a68;
+  --text:      #dce8f5;
+  --text-2:    #7a99bc;
+  --text-3:    #3a5878;
+  --font-head: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', sans-serif;
+  --radius:    8px;
+  --radius-sm: 4px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+button { font-family: var(--font-body); cursor: pointer; }
+
+/* ── PAGE SYSTEM ── */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(5,12,26,0.96);
+  backdrop-filter: blur(10px);
+  border-bottom: 0.5px solid var(--border);
+  padding: 0 1.25rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 58px;
+}
+
+.nav-logo {
+  font-family: var(--font-head);
+  font-size: 17px; font-weight: 900;
+  color: var(--text); letter-spacing: -0.2px;
+  display: flex; align-items: center; gap: 7px;
+}
+.nav-logo svg { flex-shrink: 0; }
+.nav-logo span { color: var(--blue); }
+
+.nav-links {
+  display: none;
+  list-style: none; gap: 1.8rem;
+}
+.nav-links a {
+  font-size: 13px; color: var(--text-2);
+  letter-spacing: 0.3px; transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--blue); }
+
+.nav-right { display: flex; align-items: center; gap: 0.75rem; }
+
+.nav-cta {
+  background: var(--blue); color: #030810;
+  font-size: 13px; font-weight: 500;
+  padding: 0.45rem 1rem; border-radius: var(--radius-sm);
+  border: none; white-space: nowrap;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--blue-lt); }
+
+.hamburger {
+  background: none; border: 0.5px solid var(--border2);
+  border-radius: var(--radius-sm);
+  padding: 6px 8px; display: flex; flex-direction: column;
+  gap: 4px; cursor: pointer;
+}
+.hamburger span {
+  display: block; width: 18px; height: 1.5px;
+  background: var(--text-2); border-radius: 2px; transition: all 0.25s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none; position: fixed; top: 58px; left: 0; right: 0; bottom: 0;
+  background: rgba(5,12,26,0.98); z-index: 99;
+  flex-direction: column; padding: 2rem 1.5rem; gap: 0;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-size: 22px; font-family: var(--font-head); font-weight: 700;
+  color: var(--text); padding: 1rem 0;
+  border-bottom: 0.5px solid var(--border);
+  display: block; transition: color 0.2s;
+}
+.mobile-menu a:hover { color: var(--blue); }
+.mobile-menu .m-cta {
+  margin-top: 1.5rem; background: var(--blue); color: #030810;
+  font-size: 15px; font-weight: 500; padding: 0.9rem;
+  border-radius: var(--radius-sm); border: none; text-align: center;
+}
+
+/* ── BUTTONS ── */
+.btn { display: inline-block; border: none; font-family: var(--font-body); font-weight: 500; border-radius: var(--radius-sm); cursor: pointer; transition: all 0.2s; font-size: 13px; padding: 0.7rem 1.4rem; }
+.btn-blue { background: var(--blue); color: #030810; }
+.btn-blue:hover { background: var(--blue-lt); }
+.btn-blue-lt { background: var(--blue-lt); color: #030810; }
+.btn-blue-lt:hover { opacity: 0.88; }
+.btn-outline { background: transparent; color: var(--text); border: 0.5px solid var(--border2); }
+.btn-outline:hover { border-color: var(--blue); color: var(--blue); }
+.btn-lg { font-size: 15px; padding: 0.85rem 1.8rem; }
+
+/* ── BADGES ── */
+.badge {
+  display: inline-block; font-size: 10px; letter-spacing: 1.8px;
+  text-transform: uppercase; padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-sm); margin-bottom: 1.2rem;
+}
+.badge-blue { background: #0b1d38; border: 0.5px solid var(--blue-dim); color: var(--blue); }
+.badge-lt   { background: #081624; border: 0.5px solid #163a60; color: var(--blue-lt); }
+
+/* ── SECTION HELPERS ── */
+.section-label {
+  font-size: 10px; color: var(--text-3); letter-spacing: 2.5px;
+  text-transform: uppercase; margin-bottom: 1.5rem;
+}
+.section-title {
+  font-family: var(--font-head); font-size: clamp(26px, 5vw, 38px);
+  font-weight: 900; line-height: 1.12; color: var(--text);
+  margin-bottom: 1rem;
+}
+.section-title em { color: var(--blue); font-style: normal; }
+.section-body { font-size: 14px; color: var(--text-2); line-height: 1.75; }
+
+.divider { height: 0.5px; background: var(--border); margin: 0; }
+
+/* ── CARD ── */
+.card {
+  background: var(--bg2); border: 0.5px solid var(--border);
+  border-radius: var(--radius); padding: 1.5rem;
+}
+.card-sm { padding: 1.1rem 1.25rem; }
+
+/* ── PROMISE STRIP ── */
+.promise-strip {
+  background: #060f20; border: 0.5px solid var(--blue-dim);
+  border-radius: var(--radius); padding: 1rem 1.25rem;
+  font-size: 13px; color: var(--blue-lt); line-height: 1.6;
+  display: flex; gap: 0.75rem; align-items: flex-start;
+}
+.promise-strip::before {
+  content: ''; width: 3px; min-height: 100%; background: var(--blue);
+  border-radius: 2px; flex-shrink: 0;
+}
+
+/* ── STAT BAR ── */
+.stat-bar {
+  display: grid; gap: 1px; background: var(--border);
+  border: 0.5px solid var(--border); border-radius: var(--radius);
+  overflow: hidden; grid-template-columns: repeat(2,1fr);
+}
+.stat-cell { background: var(--bg2); padding: 1.1rem 1.25rem; }
+.stat-num {
+  font-family: var(--font-head); font-size: 30px; font-weight: 700;
+  color: var(--blue); line-height: 1;
+}
+.stat-lbl { font-size: 11px; color: var(--text-3); margin-top: 3px; }
+
+/* ────────────────────────────────────────────
+   PAGE 1 — HOME
+──────────────────────────────────────────── */
+
+/* hero */
+.hero { padding: 3rem 1.25rem 2.5rem; }
+.hero-panels {
+  display: grid; gap: 1px; background: var(--border);
+  border: 0.5px solid var(--border); border-radius: var(--radius);
+  overflow: hidden; margin-bottom: 1rem;
+}
+.hero-panel { background: var(--bg2); padding: 2rem 1.5rem; }
+.hero-panel h1 {
+  font-family: var(--font-head); font-size: clamp(28px,6vw,40px);
+  font-weight: 900; line-height: 1.1; color: var(--text); margin-bottom: 0.9rem;
+}
+.hero-panel h1 em { color: var(--blue); font-style: normal; }
+.hero-panel p { font-size: 14px; color: var(--text-2); line-height: 1.75; margin-bottom: 1.4rem; }
+.hero-btns { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+/* home sections */
+.home-section { padding: 3rem 1.25rem; }
+.home-section + .home-section { border-top: 0.5px solid var(--border); }
+
+.modules-grid {
+  display: grid; gap: 1px; background: var(--border);
+  border: 0.5px solid var(--border); border-radius: var(--radius);
+  overflow: hidden;
+}
+.module-card { background: var(--bg2); padding: 1.4rem; }
+.module-card:hover { background: #08132a; }
+.mod-num { font-size: 10px; color: var(--text-3); letter-spacing: 1px; margin-bottom: 0.5rem; }
+.mod-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 0.4rem; }
+.mod-desc { font-size: 12px; color: var(--text-3); line-height: 1.55; }
+.mod-expand { font-size: 12px; color: var(--blue); margin-top: 0.6rem; display: none; line-height: 1.6; }
+
+.values-grid {
+  display: grid; gap: 1rem;
+}
+.val-item { border-left: 2px solid var(--blue); padding-left: 1rem; }
+.val-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 0.25rem; }
+.val-desc { font-size: 12px; color: var(--text-3); line-height: 1.55; }
+
+.summit-band {
+  background: var(--bg3); border: 0.5px solid var(--border);
+  border-radius: var(--radius); padding: 2rem 1.5rem;
+  display: flex; flex-direction: column; gap: 1.25rem;
+}
+.summit-tag { font-size: 10px; color: var(--blue); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.4rem; }
+.summit-band h2 { font-family: var(--font-head); font-size: 24px; color: var(--text); margin-bottom: 0.4rem; }
+.summit-band p { font-size: 13px; color: var(--text-2); }
+
+.cta-section {
+  padding: 3.5rem 1.25rem; text-align: center;
+  border-top: 0.5px solid var(--border);
+}
+.cta-section h2 { font-family: var(--font-head); font-size: clamp(24px,5vw,34px); color: var(--text); margin-bottom: 0.5rem; }
+.cta-section p { font-size: 14px; color: var(--text-2); margin-bottom: 1.5rem; }
+
+/* ────────────────────────────────────────────
+   PAGE 2 — SALES TRAINING
+──────────────────────────────────────────── */
+.page-hero {
+  padding: 3.5rem 1.25rem 3rem;
+  border-bottom: 0.5px solid var(--border);
+}
+.page-hero h1 {
+  font-family: var(--font-head); font-size: clamp(30px,6vw,46px);
+  font-weight: 900; line-height: 1.1; color: var(--text); margin-bottom: 1rem;
+}
+.page-hero h1 em { color: var(--blue); font-style: normal; }
+.page-hero p { font-size: 14px; color: var(--text-2); line-height: 1.75; margin-bottom: 1.5rem; max-width: 560px; }
+
+.assessment-steps { display: grid; gap: 1rem; margin-top: 1.5rem; }
+.step-card {
+  background: var(--bg2); border: 0.5px solid var(--border);
+  border-radius: var(--radius); padding: 1.2rem;
+  display: flex; gap: 1rem; align-items: flex-start;
+}
+.step-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--blue-dim); color: var(--blue);
+  font-size: 12px; font-weight: 500; display: flex;
+  align-items: center; justify-content: center; flex-shrink: 0;
+}
+.step-text h4 { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 0.2rem; }
+.step-text p  { font-size: 12px; color: var(--text-3); line-height: 1.5; }
+
+.full-module {
+  border-bottom: 0.5px solid var(--border); padding: 2rem 1.25rem;
+}
+.full-module:last-child { border-bottom: none; }
+.mod-header { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1rem; }
+.mod-icon {
+  width: 40px; height: 40px; border-radius: var(--radius-sm);
+  background: #0b1d38; border: 0.5px solid var(--blue-dim);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+.mod-meta h3 { font-size: 16px; font-weight: 500; color: var(--text); }
+.mod-meta span { font-size: 11px; color: var(--text-3); }
+.mod-body { font-size: 13px; color: var(--text-2); line-height: 1.7; margin-bottom: 1rem; }
+.mod-outcomes { display: flex; flex-direction: column; gap: 0.4rem; }
+.outcome { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 12px; color: var(--text-3); line-height: 1.5; }
+.outcome::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--blue); flex-shrink: 0; margin-top: 5px; }
+
+/* ────────────────────────────────────────────
+   PAGE 3 — ACADEMIC MENTORSHIP
+──────────────────────────────────────────── */
+.mentorship-pillars { display: grid; gap: 1rem; margin-top: 1.5rem; }
+.pillar-card {
+  background: var(--bg2); border: 0.5px solid var(--border);
+  border-radius: var(--radius); padding: 1.4rem;
+}
+.pillar-card h3 { font-size: 15px; font-weight: 500; color: var(--blue-lt); margin-bottom: 0.5rem; }
+.pillar-card p { font-size: 13px; color: var(--text-2); line-height: 1.65; }
+
+.audience-list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.25rem; }
+.audience-item {
+  display: flex; align-items: center; gap: 0.75rem;
+  background: var(--bg2); border: 0.5px solid var(--border);
+  border-radius: var(--radius); padding: 0.9rem 1.1rem;
+}
+.aud-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); flex-shrink: 0; }
+.aud-text h4 { font-size: 13px; font-weight: 500; color: var(--text); }
+.aud-text p  { font-size: 12px; color: var(--text-3); }
+
+/* ────────────────────────────────────────────
+   PAGE 4 — ASSESSMENT
+──────────────────────────────────────────── */
+.assess-intro { padding: 3rem 1.25rem; border-bottom: 0.5px solid var(--border); }
+.assess-grid { padding: 2rem 1.25rem; display: grid; gap: 1.5rem; }
+.assess-card {
+  background: var(--bg2); border: 0.5px solid var(--border);
+  border-radius: var(--radius); padding: 1.5rem;
+}
+.assess-card h3 { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 0.5rem; }
+.assess-card p  { font-size: 13px; color: var(--text-2); line-height: 1.65; }
+.assess-num {
+  font-family: var(--font-head); font-size: 36px; color: var(--blue);
+  font-weight: 700; line-height: 1; margin-bottom: 0.3rem;
+}
+
+/* ────────────────────────────────────────────
+   PAGE 5 — ABOUT / CONTACT
+──────────────────────────────────────────── */
+.about-grid { padding: 2rem 1.25rem; display: grid; gap: 2rem; }
+.contact-form { display: flex; flex-direction: column; gap: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-group label { font-size: 12px; color: var(--text-2); letter-spacing: 0.3px; }
+.form-group input,
+.form-group textarea,
+.form-group select {
+  background: var(--bg2); border: 0.5px solid var(--border2);
+  border-radius: var(--radius-sm); padding: 0.75rem 1rem;
+  color: var(--text); font-family: var(--font-body); font-size: 14px;
+  outline: none; transition: border-color 0.2s; width: 100%;
+}
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus { border-color: var(--blue); }
+.form-group textarea { resize: vertical; min-height: 110px; }
+.form-group select option { background: #0a1628; }
+
+/* ────────────────────────────────────────────
+   FOOTER
+──────────────────────────────────────────── */
+footer {
+  border-top: 0.5px solid var(--border);
+  padding: 2rem 1.25rem;
+  display: flex; flex-direction: column; gap: 1rem;
+}
+.footer-logo {
+  font-family: var(--font-head); font-size: 16px; font-weight: 900;
+}
+.footer-logo span { color: var(--blue); }
+.footer-tagline { font-size: 12px; color: var(--text-3); margin-top: 0.3rem; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+.footer-links a { font-size: 12px; color: var(--text-3); transition: color 0.2s; }
+.footer-links a:hover { color: var(--blue); }
+.footer-copy { font-size: 11px; color: var(--text-3); padding-top: 0.5rem; border-top: 0.5px solid var(--border); }
+
+/* ────────────────────────────────────────────
+   RESPONSIVE — tablet+
+──────────────────────────────────────────── */
+@media (min-width: 640px) {
+  .stat-bar { grid-template-columns: repeat(4,1fr); }
+  .modules-grid { grid-template-columns: repeat(2,1fr); }
+  .hero-panels { grid-template-columns: 1fr 1fr; }
+  .values-grid { grid-template-columns: repeat(2,1fr); }
+  .mentorship-pillars { grid-template-columns: repeat(2,1fr); }
+  .assess-grid { grid-template-columns: repeat(2,1fr); }
+  .summit-band { flex-direction: row; align-items: center; justify-content: space-between; }
+  footer { flex-direction: row; justify-content: space-between; align-items: flex-start; }
+}
+
+@media (min-width: 900px) {
+  nav { padding: 0 2.5rem; }
+  .nav-links { display: flex; }
+  .hamburger { display: none; }
+  .hero { padding: 4rem 2.5rem 3rem; }
+  .home-section { padding: 3.5rem 2.5rem; }
+  .page-hero { padding: 4rem 2.5rem 3rem; }
+  .full-module { padding: 2.5rem 2.5rem; }
+  .assess-intro { padding: 4rem 2.5rem; }
+  .assess-grid { padding: 2.5rem 2.5rem; grid-template-columns: repeat(3,1fr); }
+  .about-grid { padding: 3rem 2.5rem; grid-template-columns: 1fr 1fr; }
+  .modules-grid { grid-template-columns: repeat(3,1fr); }
+  .values-grid { grid-template-columns: repeat(3,1fr); }
+  .mentorship-pillars { grid-template-columns: repeat(2,1fr); }
+  footer { padding: 2rem 2.5rem; }
+  .cta-section { padding: 5rem 2.5rem; }
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.page.active > * { animation: fadeUp 0.35s ease both; }
+.page.active > *:nth-child(2) { animation-delay: 0.05s; }
+.page.active > *:nth-child(3) { animation-delay: 0.1s; }
+.page.active > *:nth-child(4) { animation-delay: 0.15s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="showPage('home')" style="cursor:pointer;">
+    <svg width="14" height="16" viewBox="0 0 14 16" fill="none"><polygon points="7,0 14,16 7,12 0,16" fill="#4a8fd4"/></svg>
+    WINNING<span>SPEAR</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home');return false;" id="nav-home" class="active">Home</a></li>
+    <li><a href="#" onclick="showPage('sales');return false;" id="nav-sales">Sales Training</a></li>
+    <li><a href="#" onclick="showPage('mentorship');return false;" id="nav-mentorship">Academic Mentorship</a></li>
+    <li><a href="#" onclick="showPage('assessment');return false;" id="nav-assessment">Assessment</a></li>
+    <li><a href="#" onclick="showPage('about');return false;" id="nav-about">About & Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="nav-cta" onclick="showPage('assessment')">Free Assessment</button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#" onclick="showPage('home');closeMenu();return false;">Home</a>
+  <a href="#" onclick="showPage('sales');closeMenu();return false;">Sales Training</a>
+  <a href="#" onclick="showPage('mentorship');closeMenu();return false;">Academic Mentorship</a>
+  <a href="#" onclick="showPage('assessment');closeMenu();return false;">Assessment</a>
+  <a href="#" onclick="showPage('about');closeMenu();return false;">About & Contact</a>
+  <button class="m-cta" onclick="showPage('assessment');closeMenu();">Get Free Assessment</button>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE: HOME
+════════════════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <div class="hero">
+    <div class="hero-panels">
+      <div class="hero-panel">
+        <span class="badge badge-blue">Sales Training</span>
+        <h1>Close More.<br/>Earn More.<br/><em>In 90 Days.</em></h1>
+        <p>Hands-on, practical training for entrepreneurs, sales professionals and corporate teams. Real-world principles that deliver measurable revenue growth — not theory alone.</p>
+        <div class="hero-btns">
+          <button class="btn btn-blue" onclick="showPage('sales')">Explore Training</button>
+          <button class="btn btn-outline" onclick="showPage('assessment')">Assessment</button>
+        </div>
+      </div>
+      <div class="hero-panel" style="border-top:0.5px solid var(--border);">
+        <span class="badge badge-lt">Academic Mentorship</span>
+        <h1 style="font-size:clamp(24px,5vw,36px);">Study Smarter.<br/>Perform <em>Beyond<br/>Limits.</em></h1>
+        <p>Powerful techniques to sharpen memory, retention, comprehension and focus — for students, executives, PhD researchers and high performers at every level.</p>
+        <div class="hero-btns">
+          <button class="btn btn-blue-lt" onclick="showPage('mentorship')">Explore Mentorship</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="promise-strip">
+      Increase your revenue by 30% within 90 days — or you didn't truly apply what we teach. That's our bold guarantee.
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="home-section" style="padding-top:2rem;padding-bottom:2rem;">
+    <div class="stat-bar">
+      <div class="stat-cell"><div class="stat-num">30%</div><div class="stat-lbl">Revenue increase guaranteed</div></div>
+      <div class="stat-cell"><div class="stat-num">90</div><div class="stat-lbl">Days to measurable results</div></div>
+      <div class="stat-cell"><div class="stat-num">6</div><div class="stat-lbl">Core sales modules</div></div>
+      <div class="stat-cell"><div class="stat-num">100%</div><div class="stat-lbl">Practical methodology</div></div>
+    </div>
+  </div>
+
+  <!-- MODULES OVERVIEW -->
+  <div class="home-section">
+    <div class="section-label">Sales Training Modules</div>
+    <div class="section-title">Six pillars to <em>dominate</em> your sales game</div>
+    <div class="modules-grid" style="margin-top:1.5rem;">
+      <div class="module-card"><div class="mod-num">01 — Psychology</div><div class="mod-title">The Psychology of a Buyer</div><div class="mod-desc">Understand why customers really buy, how emotion drives decisions, and how to build instant, deep trust.</div></div>
+      <div class="module-card"><div class="mod-num">02 — Process</div><div class="mod-title">Mastering the Sales Cycle</div><div class="mod-desc">A clear, simplified roadmap from prospecting to payment that eliminates confusion at every stage.</div></div>
+      <div class="module-card"><div class="mod-num">03 — Mindset</div><div class="mod-title">The Winning Mindset</div><div class="mod-desc">High performance starts in the mind. Rewire your beliefs to remove the invisible ceiling on your results.</div></div>
+      <div class="module-card"><div class="mod-num">04 — Prospecting</div><div class="mod-title">Cold Calling That Works</div><div class="mod-desc">Stop fearing the phone. Master resistance and turn cold conversations into warm, qualified opportunities.</div></div>
+      <div class="module-card"><div class="mod-num">05 — Closing</div><div class="mod-title">Negotiation & Closing</div><div class="mod-desc">Close profitably without discounting. Create natural urgency and seal deals with confidence — zero pressure.</div></div>
+      <div class="module-card"><div class="mod-num">06 — Follow-Up</div><div class="mod-title">Professional Follow-Up</div><div class="mod-desc">The fortune is in the follow-up. Stay persistent creatively, without annoying, to build pipelines that convert.</div></div>
+    </div>
+    <div style="margin-top:1.5rem; text-align:center;">
+      <button class="btn btn-blue" onclick="showPage('sales')">View Full Program →</button>
+    </div>
+  </div>
+
+  <!-- VALUES -->
+  <div class="home-section">
+    <div class="section-label">Why Winning Spear</div>
+    <div class="section-title">Built on six <em>uncompromising</em> values</div>
+    <div class="values-grid" style="margin-top:1.5rem;">
+      <div class="val-item"><div class="val-title">Inspiration</div><div class="val-desc">We communicate to inspire people who are internally motivated to take action and elevate their belief about what's possible.</div></div>
+      <div class="val-item"><div class="val-title">Discipline</div><div class="val-desc">We adhere to well-proven, structured procedures that guarantee consistent, repeatable results for every client.</div></div>
+      <div class="val-item"><div class="val-title">Accountability</div><div class="val-desc">We pay attention to the things that matter most, and every team member is responsible for their actions and results.</div></div>
+      <div class="val-item"><div class="val-title">Transparency</div><div class="val-desc">Everyone in our team understands exactly where we are in real time — no ambiguity, no surprises.</div></div>
+      <div class="val-item"><div class="val-title">Alignment</div><div class="val-desc">We align each team member's goals to the organization's goals to create a genuine win-win for both sides.</div></div>
+      <div class="val-item"><div class="val-title">Results</div><div class="val-desc">Everyone on our team understands what success looks like, their expected targets, and the outcomes they're accountable for.</div></div>
+    </div>
+  </div>
+
+  <!-- SUMMIT -->
+  <div class="home-section">
+    <div class="summit-band">
+      <div>
+        <div class="summit-tag">Flagship Event</div>
+        <h2>Executive Sales Summit</h2>
+        <p>An exclusive gathering of business owners, entrepreneurs and thought leaders sharing powerful insights on driving sales success. Limited seats available.</p>
+      </div>
+      <button class="btn btn-blue btn-lg" style="white-space:nowrap;flex-shrink:0;" onclick="showPage('about')">Register Interest</button>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <div class="section-label" style="justify-content:center;display:flex;">Start Here</div>
+    <h2>Ready to grow your revenue?</h2>
+    <p>A free Sales Opportunity Assessment uncovers exactly where your biggest growth is hiding.</p>
+    <button class="btn btn-blue btn-lg" onclick="showPage('assessment')">Claim Your Free Assessment</button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE: SALES TRAINING
+════════════════════════════════════════════ -->
+<div class="page" id="page-sales">
+
+  <div class="page-hero">
+    <span class="badge badge-blue">Sales Training Program</span>
+    <h1>Real skills.<br/><em>Measurable</em> results.</h1>
+    <p>Our sales training program is designed to empower entrepreneurs, sales professionals, business owners and corporate teams to increase revenue, boost profitability, and ensure long-term sustainability. Every module is built on real-world, practical principles — not theory alone.</p>
+    <div class="hero-btns">
+      <button class="btn btn-blue btn-lg" onclick="showPage('assessment')">Get Free Assessment</button>
+      <button class="btn btn-outline" onclick="showPage('about')">Contact Us</button>
+    </div>
+    <div style="margin-top:1.5rem;">
+      <div class="promise-strip">
+        Our bold promise: Increase your revenue by 30% within 90 days — or you didn't truly apply what we teach.
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULE 1 -->
+  <div class="full-module">
+    <div class="mod-header">
+      <div class="mod-icon">🧠</div>
+      <div class="mod-meta"><h3>The Psychology of a Buyer</h3><span>Module 01 — Foundation</span></div>
+    </div>
+    <p class="mod-body">Most salespeople focus on what they're selling. The best salespeople focus on why the buyer buys. This module dives deep into the emotional triggers, cognitive biases and decision-making patterns that drive every purchase. When you understand the buyer's internal world, you stop pushing products and start solving problems — and trust is built instantly. You will learn how to read a room, mirror a prospect's communication style, and create an environment where saying yes feels natural.</p>
+    <div class="mod-outcomes">
+      <div class="outcome">Identify the real emotional driver behind every buying decision</div>
+      <div class="outcome">Build instant rapport and deep trust in the first 5 minutes</div>
+      <div class="outcome">Use language that speaks directly to your prospect's desires</div>
+      <div class="outcome">Overcome resistance before it becomes an objection</div>
+    </div>
+  </div>
+
+  <!-- MODULE 2 -->
+  <div class="full-module">
+    <div class="mod-header">
+      <div class="mod-icon">🔄</div>
+      <div class="mod-meta"><h3>Mastering the Sales Cycle</h3><span>Module 02 — Process</span></div>
+    </div>
+    <p class="mod-body">Confusion kills deals. When a salesperson doesn't know exactly where they are in the process — or what the next step is — momentum is lost. This module simplifies the entire journey from first contact to final payment into a clear, repeatable framework. You'll know precisely what to do at each stage, how to advance conversations deliberately, and how to prevent deals from stalling. Whether you're in B2B, B2C, or direct sales, this roadmap works.</p>
+    <div class="mod-outcomes">
+      <div class="outcome">Map your unique sales process from prospecting to close</div>
+      <div class="outcome">Know the exact next step in every conversation</div>
+      <div class="outcome">Shorten your average sales cycle by eliminating wasted stages</div>
+      <div class="outcome">Increase pipeline velocity and close more deals per month</div>
+    </div>
+  </div>
+
+  <!-- MODULE 3 -->
+  <div class="full-module">
+    <div class="mod-header">
+      <div class="mod-icon">💡</div>
+      <div class="mod-meta"><h3>The Mindset of Great Salespeople</h3><span>Module 03 — Performance</span></div>
+    </div>
+    <p class="mod-body">You cannot outperform your mind. Every result you achieve in sales is first created in your thinking. This module addresses the internal game — the self-limiting beliefs, fear of rejection, inconsistency and imposter syndrome that silently sabotage performance. You'll learn how top earners think differently, how to develop resilience after rejection, and how to show up at your best every single day regardless of external circumstances. High performance is a choice, and this module shows you how to make it consistently.</p>
+    <div class="mod-outcomes">
+      <div class="outcome">Identify and eliminate the beliefs capping your results</div>
+      <div class="outcome">Build unshakeable resilience and consistency</div>
+      <div class="outcome">Develop daily rituals that sustain peak performance</div>
+      <div class="outcome">Transform rejection from fear into feedback</div>
+    </div>
+  </div>
+
+  <!-- MODULE 4 -->
+  <div class="full-module">
+    <div class="mod-header">
+      <div class="mod-icon">📞</div>
+      <div class="mod-meta"><h3>Cold Calling That Works</h3><span>Module 04 — Prospecting</span></div>
+    </div>
+    <p class="mod-body">Cold calling is not dead — bad cold calling is. The difference between a call that gets hung up on and one that books a meeting is entirely in your approach, your energy and your opener. This module teaches you how to command attention in the first 10 seconds, handle gatekeepers with respect, turn resistance into curiosity, and consistently convert cold contacts into warm conversations. You will leave with scripts, frameworks and the confidence to pick up the phone without hesitation.</p>
+    <div class="mod-outcomes">
+      <div class="outcome">Craft an opening that earns 30 more seconds every time</div>
+      <div class="outcome">Navigate gatekeepers without manipulation or deception</div>
+      <div class="outcome">Handle "I'm not interested" in a way that opens doors</div>
+      <div class="outcome">Book more qualified meetings per hour of calling activity</div>
+    </div>
+  </div>
+
+  <!-- MODULE 5 -->
+  <div class="full-module">
+    <div class="mod-header">
+      <div class="mod-icon">🤝</div>
+      <div class="mod-meta"><h3>Negotiation & Closing</h3><span>Module 05 — Revenue</span></div>
+    </div>
+    <p class="mod-body">The close is not a moment — it's a process. Salespeople who struggle to close are usually losing the deal earlier in the conversation without realising it. This module teaches you how to create genuine urgency without pressure, handle price objections without discounting, and use closing techniques that feel completely natural to both parties. You'll also master the art of negotiation — protecting your margin while making the prospect feel they've won a deal worth celebrating.</p>
+    <div class="mod-outcomes">
+      <div class="outcome">Apply 5 proven closing techniques that feel natural, not pushy</div>
+      <div class="outcome">Handle price objections without dropping your rate</div>
+      <div class="outcome">Create real urgency tied to the prospect's own timeline</div>
+      <div class="outcome">Protect your margin in every negotiation</div>
+    </div>
+  </div>
+
+  <!-- MODULE 6 -->
+  <div class="full-module">
+    <div class="mod-header">
+      <div class="mod-icon">🔁</div>
+      <div class="mod-meta"><h3>Follow-Up Like a Professional</h3><span>Module 06 — Pipeline</span></div>
+    </div>
+    <p class="mod-body">Studies consistently show that the majority of sales happen after the 5th follow-up — yet most salespeople give up after one or two attempts. This module teaches you how to stay persistent without becoming annoying, how to add genuine value at every touchpoint, and how to use creative multi-channel follow-up sequences that keep you top of mind without feeling like spam. The fortune really is in the follow-up — and this module shows you how to capture it.</p>
+    <div class="mod-outcomes">
+      <div class="outcome">Build a structured 8-touch follow-up sequence that converts</div>
+      <div class="outcome">Use email, phone and social media follow-up without overlap</div>
+      <div class="outcome">Add real value at every touchpoint so prospects welcome your calls</div>
+      <div class="outcome">Resurrect dead leads and reopen closed conversations</div>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h2>Ready to transform your sales team?</h2>
+    <p>Start with a free assessment. We'll identify your biggest opportunity for growth.</p>
+    <button class="btn btn-blue btn-lg" onclick="showPage('assessment')">Get Your Free Assessment</button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE: ACADEMIC MENTORSHIP
+════════════════════════════════════════════ -->
+<div class="page" id="page-mentorship">
+
+  <div class="page-hero">
+    <span class="badge badge-lt">Academic Mentorship</span>
+    <h1>Study smarter.<br/>Perform <em>beyond limits.</em></h1>
+    <p>Our Academic Mentorship program empowers learners of all levels with powerful techniques to improve memory, retention, comprehension, focus and overall study efficiency. Whether you're preparing for a critical exam or managing an executive workload, this program gives you the competitive edge you need to achieve your goals with confidence.</p>
+    <div class="hero-btns">
+      <button class="btn btn-blue-lt btn-lg" onclick="showPage('about')">Enquire Now</button>
+      <button class="btn btn-outline" onclick="showPage('assessment')">Free Assessment</button>
+    </div>
+  </div>
+
+  <!-- PILLARS -->
+  <div class="home-section">
+    <div class="section-label">Core Pillars</div>
+    <div class="section-title">Four dimensions of <em>learning mastery</em></div>
+    <div class="mentorship-pillars">
+      <div class="pillar-card">
+        <h3>Memory & Retention</h3>
+        <p>Most people forget up to 70% of what they read within 24 hours. This pillar teaches evidence-based encoding and retrieval techniques — spaced repetition, the method of loci, active recall — to dramatically improve how much you retain and for how long. You will learn to make information stick permanently rather than cramming and forgetting.</p>
+      </div>
+      <div class="pillar-card">
+        <h3>Deep Focus & Concentration</h3>
+        <p>In a world of constant distraction, the ability to enter deep work is a competitive superpower. This pillar teaches you how to architect your environment for focus, train your attention span progressively, and enter flow states on demand. Whether it's a 3-hour study block or a high-stakes work project, you'll learn to sustain elite concentration consistently.</p>
+      </div>
+      <div class="pillar-card">
+        <h3>Reading Comprehension</h3>
+        <p>Reading fast means nothing if understanding is shallow. This pillar equips you with active reading strategies, annotation frameworks and critical thinking tools that allow you to extract the key insights from any complex material — textbooks, research papers, reports — quickly and accurately. You will read less and understand more.</p>
+      </div>
+      <div class="pillar-card">
+        <h3>Study Efficiency & Systems</h3>
+        <p>Working harder without a system produces diminishing returns. This pillar gives you structured, intelligent study frameworks — time-blocking, prioritisation matrices, and review cycles — that maximise output per hour invested. Stop studying for hours with little to show for it. Build a system that works even when motivation is low.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHO IT'S FOR -->
+  <div class="home-section">
+    <div class="section-label">Who It's For</div>
+    <div class="section-title">Designed for <em>ambitious learners</em></div>
+    <div class="audience-list">
+      <div class="audience-item"><div class="aud-dot"></div><div class="aud-text"><h4>Students preparing for critical exams</h4><p>KCSE, university finals, professional certifications and entrance exams.</p></div></div>
+      <div class="audience-item"><div class="aud-dot"></div><div class="aud-text"><h4>PhD and postgraduate researchers</h4><p>Managing vast reading lists, complex writing, and academic pressure simultaneously.</p></div></div>
+      <div class="audience-item"><div class="aud-dot"></div><div class="aud-text"><h4>Entrepreneurs pursuing peak performance</h4><p>Building skills and knowledge at the speed that business demands.</p></div></div>
+      <div class="audience-item"><div class="aud-dot"></div><div class="aud-text"><h4>Executives managing demanding workloads</h4><p>Staying sharp, current and effective in a fast-moving environment.</p></div></div>
+      <div class="audience-item"><div class="aud-dot"></div><div class="aud-text"><h4>Professionals upskilling or retraining</h4><p>Returning to study after a gap or learning an entirely new field.</p></div></div>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h2>Ready to unlock your learning edge?</h2>
+    <p>Get in touch to find out how the mentorship program can be tailored to your goals.</p>
+    <button class="btn btn-blue-lt btn-lg" onclick="showPage('about')">Enquire About Mentorship</button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE: ASSESSMENT
+════════════════════════════════════════════ -->
+<div class="page" id="page-assessment">
+
+  <div class="assess-intro">
+    <span class="badge badge-blue">Sales Opportunity Assessment</span>
+    <h1 class="section-title">Find your biggest<br/><em>growth opportunity.</em></h1>
+    <p class="section-body" style="max-width:560px; margin-bottom:1.5rem;">Before investing in training, it's essential to understand where your real opportunities for growth are. Our free Sales Opportunity Assessment uncovers your most important sales metrics, diagnoses deficiencies in your current process, and identifies the potential revenue impact of fixing them.</p>
+    <div class="promise-strip">
+      This assessment is completely free. No commitment required. Just clarity on where your revenue is being left on the table.
+    </div>
+  </div>
+
+  <div class="assess-grid">
+    <div class="assess-card">
+      <div class="assess-num">01</div>
+      <h3>Define Sales Channels</h3>
+      <p>We map your existing sales channels and the corresponding processes for each — identifying where the journey breaks down and where it's working well.</p>
+    </div>
+    <div class="assess-card">
+      <div class="assess-num">02</div>
+      <h3>Diagnose Deficiencies</h3>
+      <p>A detailed review of your sales activity uncovers the hidden bottlenecks — whether in lead generation, follow-up cadence, objection handling, or closing rate.</p>
+    </div>
+    <div class="assess-card">
+      <div class="assess-num">03</div>
+      <h3>Initial Consultation</h3>
+      <p>An in-depth consultation with your Account Manager and Sales Training facilitator to understand your team's challenges, goals and current performance baseline.</p>
+    </div>
+    <div class="assess-card">
+      <div class="assess-num">04</div>
+      <h3>Collect Conversion Data</h3>
+      <p>We collect and evaluate your current sales conversion data across every key stage of the funnel — from first contact through to closed deal.</p>
+    </div>
+    <div class="assess-card">
+      <div class="assess-num">05</div>
+      <h3>Identify Revenue Impact</h3>
+      <p>Using the data gathered, we calculate the potential revenue impact of closing your performance gaps — giving you a clear picture of the opportunity ahead.</p>
+    </div>
+    <div class="assess-card" style="border:0.5px solid var(--blue-dim);background:#080f1e;">
+      <div class="assess-num" style="color:var(--blue-lt);">Free</div>
+      <h3>No Cost. No Obligation.</h3>
+      <p>The assessment is our investment in understanding your business. You get actionable insight at zero cost — and we only proceed together if there's a clear fit.</p>
+    </div>
+  </div>
+
+  <!-- CONTACT FORM -->
+  <div class="about-grid" style="padding-top:1rem;">
+    <div>
+      <div class="section-label">Book Your Assessment</div>
+      <div class="section-title" style="font-size:clamp(22px,4vw,30px);">Let's find your<br/><em>revenue gap.</em></div>
+      <p class="section-body" style="margin-top:0.75rem;">Fill in the form and a member of our team will be in touch within 24 hours to schedule your free Sales Opportunity Assessment.</p>
+    </div>
+    <div>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-group"><label>Full name</label><input type="text" placeholder="Your full name" required/></div>
+        <div class="form-group"><label>Business name</label><input type="text" placeholder="Your company or business"/></div>
+        <div class="form-group"><label>Email address</label><input type="email" placeholder="you@company.com" required/></div>
+        <div class="form-group"><label>Phone number</label><input type="tel" placeholder="+254 ..."/></div>
+        <div class="form-group">
+          <label>Team size</label>
+          <select>
+            <option value="">Select team size</option>
+            <option>Solo (just me)</option>
+            <option>2–5 people</option>
+            <option>6–15 people</option>
+            <option>16–50 people</option>
+            <option>50+ people</option>
+          </select>
+        </div>
+        <div class="form-group"><label>What's your biggest sales challenge?</label><textarea placeholder="Tell us briefly about the challenge you're facing..."></textarea></div>
+        <button type="submit" class="btn btn-blue btn-lg" style="width:100%;">Request Free Assessment →</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE: ABOUT & CONTACT
+════════════════════════════════════════════ -->
+<div class="page" id="page-about">
+
+  <div class="page-hero">
+    <span class="badge badge-blue">About Winning Spear</span>
+    <h1>Empowering people to<br/><em>unlock their potential.</em></h1>
+    <p>Winning Spear is a sales training and academic mentorship agency dedicated to helping businesses hit their revenue targets and individuals reach peak performance. What sets us apart is our hands-on approach — everything we teach is grounded in real-world, practical principles that deliver measurable results.</p>
+  </div>
+
+  <div class="about-grid">
+    <div>
+      <div class="section-label">Vision</div>
+      <div class="section-title" style="font-size:clamp(20px,4vw,28px);">To empower individuals and organizations to <em>unlock their full potential.</em></div>
+    </div>
+    <div>
+      <div class="section-label">Mission</div>
+      <div class="section-title" style="font-size:clamp(20px,4vw,28px);">To drive <em>transformation</em> and revenue growth through world-class educational training programs.</div>
+    </div>
+  </div>
+
+  <div class="home-section" style="padding-top:0.5rem;">
+    <div class="section-label">What We Offer</div>
+    <div class="section-title" style="margin-bottom:1.5rem;">Two programs. <em>One mission.</em></div>
+    <div class="modules-grid">
+      <div class="module-card" style="cursor:pointer;" onclick="showPage('sales')">
+        <div class="mod-num">Program 01</div>
+        <div class="mod-title">Sales Training Program</div>
+        <div class="mod-desc">Six modules covering buyer psychology, the sales cycle, mindset, cold calling, negotiation, closing and professional follow-up. For teams and individuals ready to grow revenue.</div>
+        <div style="margin-top:0.75rem; font-size:12px; color:var(--blue);">View program →</div>
+      </div>
+      <div class="module-card" style="cursor:pointer;" onclick="showPage('mentorship')">
+        <div class="mod-num">Program 02</div>
+        <div class="mod-title">Academic Mentorship</div>
+        <div class="mod-desc">Powerful learning techniques for students, researchers and executives — covering memory, focus, comprehension and study efficiency to help you perform at your very best.</div>
+        <div style="margin-top:0.75rem; font-size:12px; color:var(--blue);">View program →</div>
+      </div>
+      <div class="module-card" style="cursor:pointer;" onclick="showPage('assessment')">
+        <div class="mod-num">Free Service</div>
+        <div class="mod-title">Sales Opportunity Assessment</div>
+        <div class="mod-desc">A no-cost diagnostic that maps your sales channels, diagnoses deficiencies, and calculates the potential revenue impact of closing your performance gaps.</div>
+        <div style="margin-top:0.75rem; font-size:12px; color:var(--blue);">Book assessment →</div>
+      </div>
+      <div class="module-card">
+        <div class="mod-num">Flagship Event</div>
+        <div class="mod-title">Executive Sales Summit</div>
+        <div class="mod-desc">An exclusive gathering of business owners, entrepreneurs and thought leaders sharing valuable insights on driving sales success. Register your interest below.</div>
+        <div style="margin-top:0.75rem; font-size:12px; color:var(--blue);">Register interest →</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="home-section" style="border-top:0.5px solid var(--border);">
+    <div class="section-label">Get In Touch</div>
+    <div class="section-title" style="margin-bottom:0.5rem;">Let's start a <em>conversation.</em></div>
+    <p class="section-body" style="margin-bottom:2rem;">Whether you're enquiring about sales training, academic mentorship, the Executive Sales Summit, or a free assessment — we'd love to hear from you.</p>
+
+    <div style="display:grid;gap:2rem;" class="about-grid" style="padding:0;">
+      <div style="display:flex;flex-direction:column;gap:1rem;">
+        <div class="card card-sm">
+          <div class="mod-num" style="margin-bottom:0.3rem;">Location</div>
+          <div style="font-size:14px;color:var(--text);">Nairobi, Kenya</div>
+        </div>
+        <div class="card card-sm">
+          <div class="mod-num" style="margin-bottom:0.3rem;">Email</div>
+          <div style="font-size:14px;color:var(--blue);">hello@winningspear.com</div>
+        </div>
+        <div class="card card-sm">
+          <div class="mod-num" style="margin-bottom:0.3rem;">Response time</div>
+          <div style="font-size:14px;color:var(--text);">Within 24 hours on business days</div>
+        </div>
+        <div class="promise-strip" style="margin-top:0.5rem;">
+          Ready to get started? The fastest path is a free Sales Opportunity Assessment — no cost, no commitment.
+        </div>
+        <button class="btn btn-blue" onclick="showPage('assessment')">Book Free Assessment</button>
+      </div>
+      <div>
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+          <div class="form-group"><label>Full name</label><input type="text" placeholder="Your full name" required/></div>
+          <div class="form-group"><label>Email address</label><input type="email" placeholder="you@company.com" required/></div>
+          <div class="form-group">
+            <label>I'm interested in</label>
+            <select>
+              <option>Sales Training Program</option>
+              <option>Academic Mentorship</option>
+              <option>Free Sales Assessment</option>
+              <option>Executive Sales Summit</option>
+              <option>General Enquiry</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Message</label><textarea placeholder="Tell us about your goals or questions..."></textarea></div>
+          <button type="submit" class="btn btn-blue btn-lg" style="width:100%;">Send Message →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">WINNING<span>SPEAR</span></div>
+    <div class="footer-tagline">Empowering individuals and organizations to unlock their full potential.</div>
+  </div>
+  <div>
+    <div class="footer-links">
+      <a href="#" onclick="showPage('home');return false;">Home</a>
+      <a href="#" onclick="showPage('sales');return false;">Sales Training</a>
+      <a href="#" onclick="showPage('mentorship');return false;">Mentorship</a>
+      <a href="#" onclick="showPage('assessment');return false;">Assessment</a>
+      <a href="#" onclick="showPage('about');return false;">About & Contact</a>
+    </div>
+    <div class="footer-copy" style="margin-top:0.75rem;">© 2026 Winning Spear. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+const pages = { home:'page-home', sales:'page-sales', mentorship:'page-mentorship', assessment:'page-assessment', about:'page-about' };
+const navIds = { home:'nav-home', sales:'nav-sales', mentorship:'nav-mentorship', assessment:'nav-assessment', about:'nav-about' };
+
+function showPage(key) {
+  Object.values(pages).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('active');
+  });
+  const target = document.getElementById(pages[key]);
+  if (target) { target.classList.add('active'); }
+
+  Object.values(navIds).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('active');
+  });
+  const navEl = document.getElementById(navIds[key]);
+  if (navEl) navEl.classList.add('active');
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const btn = document.getElementById('hamburger');
+  menu.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+
+function closeMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+}
+
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type="submit"]');
+  const orig = btn.textContent;
+  btn.textContent = 'Message sent!';
+  btn.style.background = '#1a4a2e';
+  btn.style.color = '#4ecb7a';
+  setTimeout(() => { btn.textContent = orig; btn.style.background = ''; btn.style.color = ''; }, 3000);
+  e.target.reset();
+}
+</script>
+</body>
+</html>
