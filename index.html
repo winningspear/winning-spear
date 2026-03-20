@@ -874,22 +874,59 @@ footer {
         <button class="btn btn-blue" onclick="showPage('assessment')">Book Free Assessment</button>
       </div>
       <div>
-        <form class="contact-form" onsubmit="handleSubmit(event)">
-          <div class="form-group"><label>Full name</label><input type="text" placeholder="Your full name" required/></div>
-          <div class="form-group"><label>Email address</label><input type="email" placeholder="you@company.com" required/></div>
-          <div class="form-group">
-            <label>I'm interested in</label>
-            <select>
-              <option>Sales Training Program</option>
-              <option>Academic Mentorship</option>
-              <option>Sales Assessment</option>
-              <option>Executive Sales Summit</option>
-              <option>General Enquiry</option>
-            </select>
-          </div>
-          <div class="form-group"><label>Message</label><textarea placeholder="Tell us about your goals or questions..."></textarea></div>
-          <button type="submit" class="btn btn-blue btn-lg" style="width:100%;">Send Message →</button>
-        </form>
+        <form 
+  class="contact-form"
+  action="https://docs.google.com/forms/d/e/1FAIpQLSeeXOpu75eehgbKtjnXszACromiRsPDO8Wxcd8rwBwPQU6LFQ/formResponse"
+  method="POST"
+  target="_blank"
+>
+  <div class="form-group">
+    <label>Full name</label>
+    <input 
+      type="text" 
+      name="entry.222512969" 
+      placeholder="Your full name" 
+      required
+    />
+  </div>
+
+  <div class="form-group">
+    <label>Email address</label>
+    <input 
+      type="email" 
+      name="entry.1262478773" 
+      placeholder="you@company.com" 
+      required
+    />
+  </div>
+
+  <div class="form-group">
+    <label>I'm interested in</label>
+    <select name="entry.2120418311">
+      <option>Sales Training Program</option>
+      <option>Academic Mentorship</option>
+      <option>Free Sales Assessment</option>
+      <option>Executive Sales Summit</option>
+      <option>General Enquiry</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Message</label>
+    <textarea 
+      name="entry.609537004" 
+      placeholder="Tell us about your goals or questions..."
+    ></textarea>
+  </div>
+
+  <button 
+    type="submit" 
+    class="btn btn-blue btn-lg" 
+    style="width:100%;"
+  >
+    Send Message →
+  </button>
+</form>
       </div>
     </div>
   </div>
